@@ -1,0 +1,12 @@
+---
+ingress:
+  name: myapp-ingress
+
+domainName: example-nodejs.mydomain.com
+ingressClass: nginx
+certIssuer: letsencrypt-staging
+certSecret: example-nodejs-crt
+
+app:
+  name: example-nodejs
+  port: 8080

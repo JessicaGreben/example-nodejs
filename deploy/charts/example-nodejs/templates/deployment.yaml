@@ -1,0 +1,33 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: "{{ .Chart.Name }}"
+spec:
+  revisionHistoryLimit: 5
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "{{ .Values.app.name }}"
+  template:
+    metadata:
+      labels:
+        app: "{{ .Values.app.name }}"
+    spec:
+      containers:
+      - name: app
+        image: quay.io/jessgreb/example-nodejs:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /
+            port: "{{ .Values.app.port }}"
+            scheme: HTTP
+        readinessProbe:
+          httpGet:
+            path: /
+            port: "{{ .Values.app.port }}"
+            scheme: HTTP
+        ports:
+        - containerPort: "{{ .Values.app.port }}"
+          protocol: TCP
