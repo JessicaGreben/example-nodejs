@@ -8,6 +8,6 @@ RUN npm install
 
 COPY . /app
 
-CMD nodejs index.json
+CMD nodejs index.js
 
 EXPOSE 8080
